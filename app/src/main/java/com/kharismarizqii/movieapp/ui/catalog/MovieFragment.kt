@@ -26,7 +26,10 @@ class MovieFragment : Fragment(R.layout.fragment_catalog){
 
         binding.apply {
             rvCatalog.setHasFixedSize(true)
-            rvCatalog.adapter = adapter
+            rvCatalog.adapter = adapter.withLoadStateHeaderAndFooter(
+                header = MovieLoadStateAdapter {adapter.retry()},
+                footer = MovieLoadStateAdapter {adapter.retry()}
+            )
         }
 
         viewModel.movies.observe(viewLifecycleOwner) {
