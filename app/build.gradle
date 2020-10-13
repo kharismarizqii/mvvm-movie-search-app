@@ -19,6 +19,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "MOVIEDB_API_KEY", moviedb_api_key)
+        buildConfigField("String", "IMAGE_PATH", image_path)
     }
 
     buildTypes {
