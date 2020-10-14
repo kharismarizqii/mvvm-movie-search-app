@@ -9,13 +9,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.kharismarizqii.movieapp.R
+import com.kharismarizqii.movieapp.data.Movie
 import com.kharismarizqii.movieapp.databinding.FragmentCatalogBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MovieFragment : Fragment(R.layout.fragment_catalog){
+class MovieFragment : Fragment(R.layout.fragment_catalog), MovieAdapter.OnItemClickListener{
     private val viewModel by  viewModels<MovieViewModel>()
 
     private var _binding : FragmentCatalogBinding? = null
@@ -26,7 +28,7 @@ class MovieFragment : Fragment(R.layout.fragment_catalog){
 
         _binding = FragmentCatalogBinding.bind(view)
 
-        val adapter = MovieAdapter()
+        val adapter = MovieAdapter(this)
 
         binding.apply {
             rvCatalog.setHasFixedSize(true)
@@ -63,6 +65,11 @@ class MovieFragment : Fragment(R.layout.fragment_catalog){
         }
 
         setHasOptionsMenu(true)
+    }
+
+    override fun onItemClick(movie: Movie) {
+        val action = MovieFragmentDirections.actionMovieFragment2ToDetailsFragment(movie)
+        findNavController().navigate(action)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

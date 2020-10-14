@@ -8,5 +8,18 @@
         android:id="@+id/movieFragment2"
         android:name="com.kharismarizqii.movieapp.ui.catalog.MovieFragment"
         android:label="fragment_catalog"
-        tools:layout="@layout/fragment_catalog" />
+        tools:layout="@layout/fragment_catalog" >
+        <action
+            android:id="@+id/action_movieFragment2_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.kharismarizqii.movieapp.ui.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="movie"
+            app:argType="com.kharismarizqii.movieapp.data.Movie" />
+    </fragment>
 </navigation>
